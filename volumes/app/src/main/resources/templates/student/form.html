@@ -1,0 +1,85 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+
+<!-- (1)共通headerで置き換える -->
+<head th:replace="share/common :: meta_header('学生登録',~{::link},~{::script})">
+    <!-- (2)このページ固有で読み込むCSS/JS -->
+</head>
+
+<body>
+	<!-- (3)共通部品を呼び出す -->
+    <div th:replace="share/common :: header"></div>
+
+	<div class="mainimg">
+		<img th:src="@{/img/subimg.jpg}" alt="お問い合わせ画像">
+	</div>
+	<main>
+		<article>
+			<div class="container">
+				<div class="row">
+					<div class="col span-12">
+						<div class="breadcrumb">
+							<ul>
+								<li><a th:href="@{/demo}">ホーム</a> > 学生登録</li>
+							</ul>
+						</div>
+
+						<th:block th:if="message != null">
+							<h2 th:class="msg" th:text="${message}"></h2>
+						</th:block>
+
+						<h2 class="underline">フォーム</h2>
+						<form th:action="@{/student/form}" th:object="${studentForm}"
+							method="post">
+							<p>
+								<label for="name">名前</label> <input class="full-width"
+									type="text" id="name" name="name" maxlength="40"
+									th:field="*{name}"> <span
+									th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+									th:class="msg"></span>
+							</p>
+							<p>
+								<label for="no">学籍番号</label> <input class="full-width"
+									type="text" id="nanome" name="no" maxlength="5"
+									th:field="*{no}"> <span
+									th:if="${#fields.hasErrors('no')}" th:errors="*{no}"
+									th:class="msg"></span>
+							</p>
+							<p>
+								<label for="grade">学年</label>
+								<input class="full-width"
+									type="text" id="grade" name="grade" th:field="*{grade}"><span
+									th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}"
+									th:class="msg"></span>
+							</p>
+							<p>
+								<label for="team">クラス</label>
+								<input class="full-width"
+									type="text" id="team" name="team" th:field="*{team}"><span
+									th:if="${#fields.hasErrors('team')}" th:errors="*{team}"
+									th:class="msg"></span>
+							</p>
+							<p>
+								<label for="message">備考</label>
+								<textarea class="full-width" id="remark" name="remark"
+									th:field="*{remark}"></textarea>
+								<span th:if="${#fields.hasErrors('remark')}"
+									th:errors="*{remark}" th:class="msg"></span>
+							</p>
+							
+							<p>
+								<input class="button" type="submit" value="送信">
+							</p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</article>
+	</main>
+	
+	<div th:replace="share/common :: footer"></div>
+	<p id="pagetop">
+		<a href="#">TOP</a>
+	</p>
+</body>
+</html>

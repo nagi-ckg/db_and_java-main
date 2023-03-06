@@ -1,0 +1,76 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+
+<!-- (1)共通headerで置き換える -->
+<head th:replace="share/common :: meta_header('学生情報',~{::link},~{::script})">
+    <!-- (2)このページ固有で読み込むCSS/JS -->
+</head>
+
+<body>
+	<!-- (3)共通部品を呼び出す -->
+  <div th:replace="share/common :: header"></div>
+
+	<div class="mainimg">
+		<img th:src="@{/img/subimg.jpg}" alt="お問い合わせ画像">
+	</div>
+	<main>
+		<article>
+			<div class="container">
+				<div class="row">
+					<div class="col span-12">
+						<div class="breadcrumb">
+							<ul>
+								<li><a th:href="@{/demo}">ホーム</a> > 学生情報</li>
+							</ul>
+						</div>
+
+						<h1>学生情報</h1>
+						<div th:object="${studentForm}">
+							<div class="row">
+							  <div class="col span-2">名前</div>
+							  <div class="col">
+								<p th:text="*{name}"></p>
+							  </div>
+							</div>
+							<div class="row">
+								<div class="col span-2">学籍番号</div>
+								<div class="col">
+									<p th:text="*{no}"></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col span-2">学年</div>
+								<div class="col">
+									<p th:text="*{grade}"></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col span-2">クラス</div>
+								<div class="col">
+									<p th:text="*{team}"></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col span-2">備考</div>
+								<div class="col">
+									<p th:text="*{remark}"></p>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<a th:href="@{/student/{id}/edit(id=*{id})}" class="a-button primary">　編集　</a>
+							<a th:href="@{/student/{id}/delete(id=*{id})}" class="a-button danger">　削除　</a>
+							<a href="/student" class="a-button secondary">一覧に戻る</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
+	</main>
+
+	<div th:replace="share/common :: footer"></div>
+	<p id="pagetop">
+		<a href="#">TOP</a>
+	</p>
+</body>
+</html>

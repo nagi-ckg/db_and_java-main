@@ -1,0 +1,7 @@
+CREATE TABLE inquiry (
+  id INT NOT NULL AUTO_INCREMENT,
+  name CHAR(30) NOT NULL,
+  mail CHAR(128) NOT NULL,
+  content TEXT NOT NULL,
+  PRIMARY KEY (id)
+);

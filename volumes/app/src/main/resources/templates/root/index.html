@@ -1,0 +1,51 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+
+<!-- (1)共通headerで置き換える -->
+<head th:replace="share/common :: meta_header('トップ',~{::link},~{::script})">
+    <!-- (2)このページ固有で読み込むCSS/JS -->
+</head>
+
+<body>
+	<!-- (3)共通部品を呼び出す -->
+  <div th:replace="share/common :: header"></div>
+
+	<div class="mainimg">
+		<img th:src="@{/img/mainimg.jpg}" alt="メイン画像">
+	</div>
+	<main>
+		<section>
+			<div class="container">
+				<h2 class="catch">Works</h2>
+				<div class="row">
+					<div class="col span-4">
+						<figure>
+							<img th:src="@{/img/catch.jpg}" alt="画像">
+							<figcaption>キャプション</figcaption>
+						</figure>
+					</div>
+					<div class="col span-4">
+						<figure>
+							<img th:src="@{/img/catch.jpg}" alt="画像">
+							<figcaption>キャプション</figcaption>
+						</figure>
+					</div>
+					<div class="col span-4">
+						<figure>
+							<img th:src="@{/img/catch.jpg}" alt="画像">
+							<figcaption>キャプション</figcaption>
+						</figure>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	
+	<!-- (3)共通部品を呼び出す -->
+	<div th:replace="share/common :: footer"></div>
+
+	<p id="pagetop">
+		<a href="#">TOP</a>
+	</p>
+</body>
+</html>

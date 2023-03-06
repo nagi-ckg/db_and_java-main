@@ -1,0 +1,71 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+
+<!-- (1)共通headerで置き換える -->
+<head th:replace="share/common :: meta_header('お問い合わせ情報',~{::link},~{::script})">
+	<!-- (2)このページ固有で読み込むCSS/JS -->
+</head>
+
+<body>
+	<!-- (3)共通部品を呼び出す -->
+  <div th:replace="share/common :: header"></div>
+
+	<div class="mainimg">
+		<img th:src="@{/img/subimg.jpg}" alt="お問い合わせ画像">
+	</div>
+	<main>
+		<article>
+			<div class="container">
+				<div class="row">
+					<div class="col span-12">
+						<div class="breadcrumb">
+							<ul>
+								<li><a th:href="@{/demo}">ホーム</a> > お問い合わせ情報</li>
+							</ul>
+						</div>
+
+						<h1>お問い合わせ情報</h1>
+						<div th:object="${inquiryForm}">
+							<div class="row">
+							  <div class="col span-2">名前</div>
+							  <div class="col">
+								<p th:text="*{name}"></p>
+							  </div>
+							</div>
+							<div class="row">
+								<div class="col span-2">メールアドレス</div>
+								<div class="col">
+									<p th:text="*{mail}"></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col span-2">問い合わせ</div>
+								<div class="col">
+									<p th:text="*{content}"></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col span-2">年齢</div>
+								<div class="col">
+									<p th:text="*{age}"></p>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<a th:href="@{/inquiry/{id}/edit(id=*{id})}" class="a-button primary">　編集　</a>
+							<a th:href="@{/inquiry/{id}/delete(id=*{id})}" class="a-button danger">　削除　</a>
+							<a href="/inquiry" class="a-button secondary">一覧に戻る</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
+	</main>
+	
+	<!-- (3)共通部品を呼び出す -->
+	<div th:replace="share/common :: footer"></div>
+	<p id="pagetop">
+		<a href="#">TOP</a>
+	</p>
+</body>
+</html>

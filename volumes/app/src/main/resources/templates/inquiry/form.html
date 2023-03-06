@@ -1,0 +1,77 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+
+<!-- (1)共通headerで置き換える -->
+<head th:replace="share/common :: meta_header('お問い合わせ',~{::link},~{::script})">
+    <!-- (2)このページ固有で読み込むCSS/JS -->
+</head>
+
+<body>
+	<!-- (3)共通部品を呼び出す -->
+	<div th:replace="share/common :: header"></div>
+
+	<div class="mainimg">
+		<img th:src="@{/img/subimg.jpg}" alt="お問い合わせ画像">
+	</div>
+	<main>
+		<article>
+			<div class="container">
+				<div class="row">
+					<div class="col span-12">
+						<div class="breadcrumb">
+							<ul>
+								<li><a th:href="@{/demo}">ホーム</a> > お問い合わせ</li>
+							</ul>
+						</div>
+
+						<th:block th:if="message != null">
+							<h2 th:class="msg" th:text="${message}"></h2>
+						</th:block>
+
+						<h2 class="underline">フォーム</h2>
+						<form th:action="@{/inquiry/form}" th:object="${inquiryForm}"
+							method="post">
+							<p>
+								<label for="name">お名前</label> <input class="full-width"
+									type="text" id="name" name="name" maxlength="10"
+									th:field="*{name}"> <span
+									th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+									th:class="msg"></span>
+							</p>
+							<p>
+								<label for="email">メールアドレス</label> <input class="full-width"
+									type="email" id="mail" name="mail" th:field="*{mail}"><span
+									th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"
+									th:class="msg"></span>
+							</p>
+							<p>
+								<label for="message">お問い合わせ内容</label>
+								<textarea class="full-width" id="content" name="content"
+									th:field="*{content}"></textarea>
+								<span th:if="${#fields.hasErrors('content')}"
+									th:errors="*{content}" th:class="msg"></span>
+							</p>
+							<p>
+								<label for="age">年齢</label>
+								<input class="full-width"
+									type="text" id="age" name="age" th:field="*{age}"><span
+									th:if="${#fields.hasErrors('age')}" th:errors="*{age}"
+									th:class="msg"></span>
+							</p>
+							<p>
+								<input class="button" type="submit" value="送信">
+							</p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</article>
+	</main>
+	
+	<!-- (3)共通部品を呼び出す -->
+	<div th:replace="share/common :: footer"></div>
+	<p id="pagetop">
+		<a href="#">TOP</a>
+	</p>
+</body>
+</html>
